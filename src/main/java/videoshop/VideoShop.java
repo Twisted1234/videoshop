@@ -55,36 +55,4 @@ public class VideoShop {
 			registry.addViewController("/").setViewName("index");
 		}
 	}
-
-	@Configuration
-	@ConditionalOnWebApplication
-	static class WebSecurityConfiguration {
-
-		/**
-		 * Disabling Spring Security's CSRF support as we do not implement pre-flight request handling for the sake of
-		 * simplicity. Setting up basic security and defining login and logout options.
-		 *
-		 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
-		 */
-		 @Bean
-            public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-                http
-                    // Autorisiere alle Anfragen (im Beispiel: nur /public ohne Auth)
-                    .authorizeHttpRequests(authorize -> authorize
-                        .antMatchers("/public/**", "/login", "/error").permitAll()
-                        .anyRequest().authenticated()
-                    )
-                    // Konfiguration für Form-Login (falls du noch den klassischen Login beibehalten möchtest)
-                    .formLogin(form -> form
-                        .loginPage("/login") // falls du eine individuelle Login-Seite nutzen willst
-                        .permitAll()
-                    )
-                    // OAuth2-Login aktivieren
-                    .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login")
-                        // Eventuell kannst du hier einen custom OAuth2UserService einstellen,
-                        // um die Google User-Informationen in einem lokalen Benutzerkonto abzubilden
-                    );
-                return http.build();
-	}
 }
