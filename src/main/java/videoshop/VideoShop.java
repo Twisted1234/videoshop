@@ -55,25 +55,4 @@ public class VideoShop {
 			registry.addViewController("/").setViewName("index");
 		}
 	}
-
-	@Configuration
-	@ConditionalOnWebApplication
-	static class WebSecurityConfiguration {
-
-		/**
-		 * Disabling Spring Security's CSRF support as we do not implement pre-flight request handling for the sake of
-		 * simplicity. Setting up basic security and defining login and logout options.
-		 *
-		 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
-		 */
-		@Bean
-		SecurityFilterChain videoShopSecurity(HttpSecurity http) throws Exception {
-
-			return http
-					.headers(headers -> headers.frameOptions(FrameOptionsConfig::sameOrigin))
-					.csrf(csrf -> csrf.disable())
-					.formLogin(login -> login.loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE))
-					.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/")).build();
-		}
-	}
 }

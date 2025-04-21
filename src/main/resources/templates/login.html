@@ -20,6 +20,17 @@
                 </div>
 
                 <button type="submit" th:text="#{login.login}" class="ui button">Log in</button>
+                <!-- Google-Login Button -->
+                <a th:href="@{/oauth2/authorization/google}"
+                   class="ui icon button"
+                   style="padding: .5em;">
+                    <img th:src="@{/resources/img/google-logo.png}"
+                         alt="Google Login"
+                         style="height:1.5em;"/>
+                </a>
+                <a th:href="@{/oauth2/authorization/google}" class="ui button">
+                    Mit Google anmelden
+                </a>
             </form>
         </section>
     </body>
