@@ -66,14 +66,25 @@ public class VideoShop {
 		 *
 		 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
 		 */
-		@Bean
-		SecurityFilterChain videoShopSecurity(HttpSecurity http) throws Exception {
-
-			return http
-					.headers(headers -> headers.frameOptions(FrameOptionsConfig::sameOrigin))
-					.csrf(csrf -> csrf.disable())
-					.formLogin(login -> login.loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE))
-					.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/")).build();
-		}
+		 @Bean
+            public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http
+                    // Autorisiere alle Anfragen (im Beispiel: nur /public ohne Auth)
+                    .authorizeHttpRequests(authorize -> authorize
+                        .antMatchers("/public/**", "/login", "/error").permitAll()
+                        .anyRequest().authenticated()
+                    )
+                    // Konfiguration für Form-Login (falls du noch den klassischen Login beibehalten möchtest)
+                    .formLogin(form -> form
+                        .loginPage("/login") // falls du eine individuelle Login-Seite nutzen willst
+                        .permitAll()
+                    )
+                    // OAuth2-Login aktivieren
+                    .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login")
+                        // Eventuell kannst du hier einen custom OAuth2UserService einstellen,
+                        // um die Google User-Informationen in einem lokalen Benutzerkonto abzubilden
+                    );
+                return http.build();
 	}
 }
