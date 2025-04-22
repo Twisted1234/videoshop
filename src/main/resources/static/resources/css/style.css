@@ -17,3 +17,60 @@ img.thumbnail {
 	width: 160px;
 	display: block;
 }
+/* Google‑Login Button */
+.btn-google {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.5em 1em;
+	background-color: #4285F4;  /* Googles Blau */
+	color: #FFFFFF;             /* Weißer Text */
+	border: none;               /* Kein Rahmen */
+	border-radius: 4px;         /* Leicht abgerundete Ecken */
+	font-size: 1em;
+	text-decoration: none;      /* Kein Unterstrich */
+	cursor: pointer;
+	/* Optional: leichter Schatten für Tiefe */
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.btn-google img {
+	height: 20em;
+	width: auto;
+}
+.btn-google:hover {
+	background-color: #3367D6;  /* dunkleres Blau im Hover */
+}
+/* Container organisiert Buttons nebeneinander mit Abstand */
+.button-row {
+	display: flex;
+	gap: 0.5em;           /* Abstand zwischen den Buttons */
+	margin-top: 1em;      /* Abstand zur Passwort‑Box */
+}
+
+/* Basis‑Styling für beide Buttons: gleiche Höhe/Padding/font */
+.button-row .ui.button,
+.button-row .btn-google {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.78571429em 1.5em;  /* exakt wie Semantic‑UI .ui.button */
+	font-size: 1em;
+	line-height: normal;
+	border-radius: 0.28571429rem; /* wie Semantic UI */
+	text-decoration: none;
+}
+
+/* Google‑Button‑Styles */
+.btn-google {
+	background-color: #4285F4;
+	color: #fff;
+	border: none;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.btn-google img {
+	height: 1.2em;
+	margin-right: 0.5em;
+}
+.btn-google:hover {
+	background-color: #3367D6;
+}
+
